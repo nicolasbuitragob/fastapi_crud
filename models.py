@@ -1,0 +1,51 @@
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Time, Float
+from sqlalchemy.orm import relationship
+
+from .database import Base
+
+
+class Stage(Base):
+    __tablename__ = "stages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    stage_time = Column(Time)
+    stage_type = Column(String)
+    distance_km = Column(Float)
+    start = Column(String)
+    finish = Column(String)
+    cyclist_id = Column(Integer, ForeignKey("cyclists.id"))
+
+
+class Cyclist(Base):
+    __tablename__ = "cyclists"
+
+    id = Column(Integer, primary_key=True, index=True)
+    cyclyst_name = Column(String)
+    cyclist_time = Column(Time,default  = True)
+    specility = Column(String)
+    cyclist_country = Column(String)
+    team_id = Column(Integer, ForeignKey("teams.id"))
+
+class Team(Base):
+    __tablename__ = "teams"
+
+    id = Column(Integer, primary_key=True, index=True)
+    country = Column(String)
+    team_name = Column(String)
+    coach_id = Column(Integer, ForeignKey("coaches.id"))
+
+class Coach(Base):
+    __tablename__ = "coaches"
+
+    id = Column(Integer, primary_key=True, index=True)
+    coach_name = Column(String)
+    coach_country = Column(String)
+
+
+class Sponsor(Base):
+    __tablename__ = "sponsors"
+
+    id = Column(Integer, primary_key=True, index=True)
+    sponsor_name = Column(String)
+    sponsor_money = Column(Float)
+    team_id = Column(Integer, ForeignKey("teams.id"))
