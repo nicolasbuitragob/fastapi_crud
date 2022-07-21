@@ -1,5 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Time, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import  Column, ForeignKey, Integer, String, Time, Float
 
 from .database import Base
 
@@ -20,7 +19,7 @@ class Cyclist(Base):
     __tablename__ = "cyclists"
 
     id = Column(Integer, primary_key=True, index=True)
-    cyclyst_name = Column(String)
+    cyclist_name = Column(String)
     cyclist_time = Column(Time,default  = True)
     specility = Column(String)
     cyclist_country = Column(String)
