@@ -35,10 +35,8 @@ class CyclistCreate(Cyclist):
 
 
 class Team(BaseModel):
-    id: int
     country: str
     team_name: str
-    coach_id : int
 
     class Config:
         orm_mode = True
@@ -46,22 +44,12 @@ class Team(BaseModel):
 class TeamCreate(Team):
     pass
 
-class Coach(BaseModel):
-    id: int
-    coach_name: str
-    coach_country: str
-    
-    class Config:
-        orm_mode = True
-
-class CoachCreate(Coach):
-    pass
 
 class Sponsor(BaseModel):
     id: int
     sponsor_name: str
     sponsor_money: str
-    team_ : int
+    team_id : int
 
     class Config:
         orm_mode = True

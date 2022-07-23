@@ -31,15 +31,6 @@ class Team(Base):
     id = Column(Integer, primary_key=True, index=True)
     country = Column(String)
     team_name = Column(String)
-    coach_id = Column(Integer, ForeignKey("coaches.id"))
-
-class Coach(Base):
-    __tablename__ = "coaches"
-
-    id = Column(Integer, primary_key=True, index=True)
-    coach_name = Column(String)
-    coach_country = Column(String)
-
 
 class Sponsor(Base):
     __tablename__ = "sponsors"

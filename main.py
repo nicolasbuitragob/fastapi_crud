@@ -1,6 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
-
+from typing import List
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
@@ -18,19 +18,30 @@ def get_db():
         db.close()
 
 
-@app.post("/coach/", response_model=schemas.Coach)
-def create_coach(coach: schemas.Coach, db: Session = Depends(get_db)):
-    db_coach = crud.get_coach(db, coach_id = coach.id)
-    if db_coach:
-        raise HTTPException(status_code=400, detail="coach already in db")
-    return crud.create_coach(db=db, coach=coach)
+@app.get("/get_teams/")
+def get_teams(db: Session = Depends(get_db)):
+    teams = crud.get_teams(db)
+    return teams
+
+@app.get("/team/{team_name}",response_model = schemas.Team)
+def get_team(team_name:str, db: Session = Depends(get_db)):
+    team = crud.get_team(team_name,db)
+    return team
 
 
-# @app.get("/users/", response_model=List[schemas.User])
-# def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-#     users = crud.get_users(db, skip=skip, limit=limit)
-#     return users
 
+@app.post("/create_team/")
+def create_team(team: schemas.Team, db: Session = Depends(get_db)):
+    db_team = crud.get_team(team.team_name,db)
+    if db_team:
+        raise HTTPException(status_code=400, detail="team already in db")
+    return crud.create_team(db=db, team=team)
+
+
+# @app.get("/teams/", response_model=schemas.Teams)
+# def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+#     teams = crud.get_teams(db, skip=skip, limit=limit)
+#     return teams
 
 # @app.get("/users/{user_id}", response_model=schemas.User)
 # def read_user(user_id: int, db: Session = Depends(get_db)):
