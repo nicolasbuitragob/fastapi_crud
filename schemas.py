@@ -46,13 +46,12 @@ class TeamCreate(Team):
 
 
 class Sponsor(BaseModel):
-    id: int
     sponsor_name: str
-    sponsor_money: str
-    team_id : int
+    sponsor_money: float
 
     class Config:
         orm_mode = True
 
-class SponsrCreate(Sponsor):
-    pass
+class SponsorCreate(Sponsor):
+    team_name:str
+    

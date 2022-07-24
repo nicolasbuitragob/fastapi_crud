@@ -2,9 +2,7 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
-
-
-
+# Teams query
 def get_teams(db: Session):
     teams  = db.query(models.Team).all()
     return teams
@@ -20,6 +18,32 @@ def create_team(team: schemas.TeamCreate,db: Session):
     db.commit()
     db.refresh(db_team)
     return db_team
+
+
+#Sponsors query
+def get_sponsors(db: Session):
+    sponsors  = db.query(models.Sponsor).all()
+    return sponsors
+
+def get_sponsor(sponsor_name , db: Session):
+    sponsor  = db.query(models.Sponsor).filter(models.Sponsor.sponsor_name == sponsor_name).first()
+    return sponsor
+     
+def create_sponsor(sponsor: schemas.SponsorCreate,db: Session,team_id:int):
+    db_sponsor = models.Sponsor(sponsor_name = sponsor.sponsor_name, 
+                             sponsor_money = sponsor.sponsor_money)
+
+    db_sponsor.team_id = team_id
+
+    db.add(db_sponsor)
+    db.commit()
+    db.refresh(db_sponsor)
+    return db_sponsor
+
+
+
+
+
 
 # def get_stage(db: Session, stage_id: int):
 #     return db.query(models.Stage).filter(models.Stage.id == stage_id).first()
