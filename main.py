@@ -44,7 +44,7 @@ def create_team(team: schemas.Team, db: Session = Depends(get_db)):
 
 #Sponsors
 @app.get("/get_sponsors/")
-def get_teams(db: Session = Depends(get_db)):
+def get_sponsors(db: Session = Depends(get_db)):
     teams = crud.get_sponsors(db)
     return teams
 
@@ -65,6 +65,29 @@ def create_sponsor(sponsor: schemas.SponsorCreate, db: Session = Depends(get_db)
     
     return crud.create_sponsor(db=db, sponsor=sponsor,team_id=team_id)
 
+
+
+@app.get("/get_cyclists/")
+def get_cyclists(db: Session = Depends(get_db)):
+    teams = crud.get_cyclists(db)
+    return teams
+
+@app.get("/cyclists/{cyclist_name}")
+def get_sponsor(cyclist_name:str, db: Session = Depends(get_db)):
+    cyclist = crud.get_cyclist(cyclist_name,db)
+    return cyclist
+
+
+
+@app.post("/create_cyclist/")
+def create_cyclist(cyclist: schemas.CyclistCreate, db: Session = Depends(get_db)):
+    db_cyclist = crud.get_cyclist(cyclist.cyclist_name,db)
+    team_id = crud.get_team(cyclist.team_name,db).id
+        
+    if db_cyclist:
+        raise HTTPException(status_code=400, detail="cyclist already in db")
+    
+    return crud.create_cyclist(db=db, cyclist=cyclist,team_id=team_id)
 
 
 # @app.get("/users/{user_id}", response_model=schemas.User)

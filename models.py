@@ -21,7 +21,7 @@ class Cyclist(Base):
     id = Column(Integer, primary_key=True, index=True)
     cyclist_name = Column(String)
     cyclist_time = Column(Time,default  = True)
-    specility = Column(String)
+    speciality = Column(String)
     cyclist_country = Column(String)
     team_id = Column(Integer, ForeignKey("teams.id"))
 
@@ -32,7 +32,6 @@ class Team(Base):
     country = Column(String)
     team_name = Column(String)
 
-#    items = relationship("Sponsor", back_populates="teams")
 
 class Sponsor(Base):
     __tablename__ = "sponsors"
@@ -41,5 +40,3 @@ class Sponsor(Base):
     sponsor_name = Column(String)
     sponsor_money = Column(Float)
     team_id = Column(Integer, ForeignKey("teams.id"))
-
-    #teams = relationship("Team", back_populates="teams")

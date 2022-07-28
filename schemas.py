@@ -19,13 +19,10 @@ class StageCreate(Stage):
 
 
 class Cyclist(BaseModel):
-    id: int
     cyclist_name : str
-    cyclist_time : time
     speciality : str
     cyclist_country : str
-    team_id : int
-
+    team_name:str
     class Config:
         orm_mode = True
 

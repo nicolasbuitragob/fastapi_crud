@@ -40,26 +40,26 @@ def create_sponsor(sponsor: schemas.SponsorCreate,db: Session,team_id:int):
     db.refresh(db_sponsor)
     return db_sponsor
 
+#Cyclists
+
+def get_cyclists(db: Session):
+    cyclists  = db.query(models.Cyclist).all()
+    return cyclists
+
+def get_cyclist(cyclist_name , db: Session):
+    cyclist  = db.query(models.Cyclist).filter(models.Cyclist.cyclist_name == cyclist_name).first()
+    return cyclist
+     
+def create_cyclist(cyclist: schemas.CyclistCreate,db: Session,team_id:int):
+    db_cyclist = models.Cyclist(cyclist_name = cyclist.cyclist_name, 
+                             speciality = cyclist.speciality,
+                             cyclist_country = cyclist.cyclist_country)
+
+    db_cyclist.team_id = team_id
+
+    db.add(db_cyclist)
+    db.commit()
+    db.refresh(db_cyclist)
+    return db_cyclist
 
 
-
-
-
-# def get_stage(db: Session, stage_id: int):
-#     return db.query(models.Stage).filter(models.Stage.id == stage_id).first()
-
-# def get_cyclist(db: Session, cyclist_id):
-#     return db.query(models.Cyclist).filter(models.Cyclist.id == cyclist_id).first()
-
-
-# def create_cyclist(db: Session, cyclist: schemas.CyclistCreate):
-#     db_cyclist = models.Cyclist(cyclist_name = cyclist.cyclist_name, 
-#                                 cyclist_time = cyclist.cyclist_time,
-#                                 speciality = cyclist.speciality,
-#                                 cyclist_country = cyclist.cyclist_country)
-#     db.add(db_cyclist)
-#     db.commit()
-#     db.refresh(db_cyclist)
-#     return db_cyclist
-
-##missing creat sponsor
