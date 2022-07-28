@@ -1,4 +1,6 @@
 # fastapi_crud
+Practicing FastAPI and databases :)
+
 ## File Structure
 ├── crud.py \
 ├── database.py \
