@@ -7,8 +7,8 @@ def get_teams(db: Session):
     teams  = db.query(models.Team).all()
     return teams
 
-def get_team(team_name , db: Session):
-    team  = db.query(models.Team).filter(models.Team.team_name == team_name).first()
+def get_team(team_name, db: Session):
+    team = db.query(models.Team).filter(models.Team.team_name == team_name).first()
     return team
      
 def create_team(team: schemas.TeamCreate,db: Session):
@@ -25,8 +25,8 @@ def get_sponsors(db: Session):
     sponsors  = db.query(models.Sponsor).all()
     return sponsors
 
-def get_sponsor(sponsor_name , db: Session):
-    sponsor  = db.query(models.Sponsor).filter(models.Sponsor.sponsor_name == sponsor_name).first()
+def get_sponsor(sponsor_name, db: Session):
+    sponsor = db.query(models.Sponsor).filter(models.Sponsor.sponsor_name == sponsor_name).first()
     return sponsor
      
 def create_sponsor(sponsor: schemas.SponsorCreate,db: Session,team_id:int):
@@ -46,8 +46,8 @@ def get_cyclists(db: Session):
     cyclists  = db.query(models.Cyclist).all()
     return cyclists
 
-def get_cyclist(cyclist_name , db: Session):
-    cyclist  = db.query(models.Cyclist).filter(models.Cyclist.cyclist_name == cyclist_name).first()
+def get_cyclist(cyclist_name, db: Session):
+    cyclist = db.query(models.Cyclist).filter(models.Cyclist.cyclist_name == cyclist_name).first()
     return cyclist
      
 def create_cyclist(cyclist: schemas.CyclistCreate,db: Session,team_id:int):
