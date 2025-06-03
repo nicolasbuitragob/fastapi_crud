@@ -19,7 +19,7 @@ class Cyclist(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     cyclist_name = Column(String)
-    cyclist_time = Column(Time,default  = True)
+    cyclist_time = Column(Time, default=None)
     speciality = Column(String)
     cyclist_country = Column(String)
     team_id = Column(Integer, ForeignKey("teams.id"))
